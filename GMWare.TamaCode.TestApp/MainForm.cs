@@ -47,10 +47,10 @@ namespace GMWare.TamaCode.TestApp
             raisedTamaCheckbox_CheckedChanged(this, EventArgs.Empty);
             meetupTimeComboBox.SelectedIndex = 0;
 
-            //MessageBox.Show(this, "This program has minimal range checking for values and may " +
-            //    "generate invalid data that could crash your Tamagotchi Pix. The author of this " +
-            //    "program takes no responsibility for data loss or damage resulting from the use " +
-            //    "of this program.", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(this, "This program has minimal range checking for values and may " +
+                "generate invalid data that could crash your Tamagotchi Pix. The author of this " +
+                "program takes no responsibility for data loss or damage resulting from the use " +
+                "of this program.", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void goToSetupButton_Click(object sender, EventArgs e)
