@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Authors>cyanic</Authors>
+    <Product>Tama Code Tester</Product>
+    <Description>App for testing Tama Code encoding and decoding</Description>
+    <Copyright>©2021 cyanic</Copyright>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/GMMan/tama-code-lib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/GMMan/tama-code-lib</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GMWare.TamaCode\GMWare.TamaCode.csproj" />
+  </ItemGroup>
+
+</Project>

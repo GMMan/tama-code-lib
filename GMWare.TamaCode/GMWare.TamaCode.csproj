@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>cyanic</Authors>
+    <Product>Tama Code Library</Product>
+    <Description>Encodes/decodes Tama Code bytes.</Description>
+    <Copyright>©2021 cyanic</Copyright>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/GMMan/tama-code-lib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/GMMan/tama-code-lib</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
