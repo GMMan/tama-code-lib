@@ -685,6 +685,7 @@ namespace GMWare.TamaCode.TestApp
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.codeHexTextBox);
             this.Controls.Add(this.qrPicturebox);
+            this.MinimumSize = new System.Drawing.Size(410, 845);
             this.Name = "MainForm";
             this.Text = "Tama Code Tester";
             this.Load += new System.EventHandler(this.MainForm_Load);
