@@ -76,6 +76,7 @@ namespace GMWare.TamaCode.TestApp
             this.label10 = new System.Windows.Forms.Label();
             this.encodeButton = new System.Windows.Forms.Button();
             this.decodeButton = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.qrPicturebox)).BeginInit();
             this.tabControl.SuspendLayout();
             this.setupTabPage.SuspendLayout();
@@ -109,6 +110,7 @@ namespace GMWare.TamaCode.TestApp
             this.qrPicturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.qrPicturebox.TabIndex = 0;
             this.qrPicturebox.TabStop = false;
+            this.qrPicturebox.Click += new System.EventHandler(this.qrPicturebox_Click);
             // 
             // codeHexTextBox
             // 
@@ -675,6 +677,11 @@ namespace GMWare.TamaCode.TestApp
             this.decodeButton.UseVisualStyleBackColor = true;
             this.decodeButton.Click += new System.EventHandler(this.decodeButton_Click);
             // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "PNG Image|*.png";
+            this.saveFileDialog.Title = "Save Tama Code";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -766,6 +773,7 @@ namespace GMWare.TamaCode.TestApp
         private System.Windows.Forms.Button randomDeviceIdButton;
         private System.Windows.Forms.TextBox deviceIdTextbox;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

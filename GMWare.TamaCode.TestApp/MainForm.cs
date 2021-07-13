@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -282,6 +283,26 @@ namespace GMWare.TamaCode.TestApp
                 data[i] = b;
             }
             return data;
+        }
+
+        private void qrPicturebox_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (var fs = saveFileDialog.OpenFile())
+                    {
+                        qrPicturebox.Image.Save(fs, ImageFormat.Png);
+                    }
+                    MessageBox.Show(this, "Tama Code saved.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Error saving Tama Code: " + ex.Message,
+                        Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
