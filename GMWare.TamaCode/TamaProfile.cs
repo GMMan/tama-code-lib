@@ -20,6 +20,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace GMWare.TamaCode
@@ -77,7 +78,11 @@ namespace GMWare.TamaCode
             }
             set
             {
-                if (value != null && value.Length > 8) throw new ArgumentException("Name cannot be longer than 8 characters.");
+                if (value != null)
+                {
+                    StringInfo si = new StringInfo(value);
+                    if (si.LengthInTextElements > 8) throw new ArgumentException("Name cannot be longer than 8 characters.");
+                }
                 name = value;
             }
         }
@@ -93,7 +98,11 @@ namespace GMWare.TamaCode
             }
             set
             {
-                if (value != null && value.Length > 24) throw new ArgumentException("Greeting cannot be longer than 24 characters.");
+                if (value != null)
+                {
+                    StringInfo si = new StringInfo(value);
+                    if (si.LengthInTextElements > 24) throw new ArgumentException("Greeting cannot be longer than 24 characters.");
+                }
                 greeting = value;
             }
         }

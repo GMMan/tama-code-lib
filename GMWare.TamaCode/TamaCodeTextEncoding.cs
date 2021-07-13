@@ -20,6 +20,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -30,7 +31,17 @@ namespace GMWare.TamaCode
     /// </summary>
     class TamaCodeTextEncoding
     {
-        const string CHAR_REP = " 0123456789+-ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÆÇÉÈÊËÎÏÓÔÕÖŒÙÚÛÜŸÍÑ—~⋯,:()“”.'!?&⭕❌♡☼★🌀🎵💢⤴⤵→←₲%😄😆😣😑😵😪👾📟Ò🎁¡¿°Ì🍰✨";
+        static readonly string[] CHAR_REP = {
+            " ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-",
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+            "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+            "À", "Á", "Â", "Ã", "Ä", "Æ", "Ç", "É", "È", "Ê", "Ë", "Î", "Ï",
+            "Ó", "Ô", "Õ", "Ö", "Œ", "Ù", "Ú", "Û", "Ü", "Ÿ", "Í", "Ñ", "—",
+            "~", "⋯", ",", ":", "(", ")", "“", "”", ".", "'", "!", "?", "&",
+            "⭕", "❌", "♡", "☼", "★", "🌀", "🎵", "💢", "⤴", "⤵", "→",
+            "←", "₲", "%", "😄", "😆", "😣", "😑", "😵", "😪", "👾",
+            "📟", "Ò", "🎁", "¡", "¿", "°", "Ì", "🍰", "✨"
+        };
 
         static TamaCodeTextEncoding instance;
 
@@ -51,7 +62,7 @@ namespace GMWare.TamaCode
             public short Index { get; set; }
             public short BitLength { get; set; }
             public int EncodedValue { get; set; }
-            public char Representation { get; set; }
+            public string Representation { get; set; }
         }
 
         List<EncodingChar> encodingTable;
@@ -61,7 +72,7 @@ namespace GMWare.TamaCode
             GenerateEncodingTable();
         }
 
-        EncodingChar FindCharByRepresentation(char ch)
+        EncodingChar FindCharByRepresentation(string ch)
         {
             return encodingTable.Find(x => x.Representation == ch);
         }
@@ -114,8 +125,10 @@ namespace GMWare.TamaCode
             if (str == null) str = string.Empty;
             MsbBitWriter bitWriter = new MsbBitWriter(bw);
 
-            foreach (var ch in str)
+            StringInfo si = new StringInfo(str);
+            for (int i = 0; i < si.LengthInTextElements; ++i)
             {
+                string ch = si.SubstringByTextElements(i, 1);
                 var encChar = FindCharByRepresentation(ch);
                 if (encChar == null) throw new ArgumentException($"Character '{ch}' is unrepresentable.", nameof(str));
                 bitWriter.Write((uint)encChar.EncodedValue, encChar.BitLength);
