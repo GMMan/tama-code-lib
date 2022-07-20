@@ -52,9 +52,18 @@ namespace GMWare.TamaCode
             using (MemoryStream ms = new MemoryStream(data))
             {
                 BinaryReader br = new BinaryReader(ms);
-                if (new string(br.ReadChars(3)) != "TMG") throw new ArgumentException("Code is not a Tama Code.", nameof(code));
+                string magic = new string(br.ReadChars(3));
+                int version;
+                if (magic == "TMG")
+                    version = 0;
+                else if (magic == "TG2")
+                    version = 1;
+                else
+                    throw new ArgumentException("Code is not a Tama Code.", nameof(code));
+
                 var codeType = (TamaCodeType)br.ReadByte();
                 BaseTamaCode tamaCode = MakeTamaCodeByType(codeType);
+                tamaCode.Version = version;
                 if (tamaCode is FriendTamaCode friendCode)
                 {
                     friendCode.DeviceId = br.ReadUInt32();
@@ -90,7 +99,19 @@ namespace GMWare.TamaCode
             using (MemoryStream ms = new MemoryStream())
             {
                 BinaryWriter bw = new BinaryWriter(ms);
-                bw.Write("TMG".ToCharArray());
+                string magic;
+                switch (code.Version)
+                {
+                    case 0:
+                        magic = "TMG";
+                        break;
+                    case 1:
+                        magic = "TG2";
+                        break;
+                    default:
+                        throw new ArgumentException("Code has invalid version.", nameof(code));
+                }
+                bw.Write(magic.ToCharArray());
                 bw.Write((byte)code.CodeType);
 
                 if (code is FriendTamaCode friendCode)
@@ -224,6 +245,8 @@ namespace GMWare.TamaCode
                     return new TamaCodeGift();
                 case TamaCodeType.Download:
                     return new TamaCodeDownload();
+                case TamaCodeType.Party:
+                    return new TamaCodeParty();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), "Unknown Tama Code type.");
             }

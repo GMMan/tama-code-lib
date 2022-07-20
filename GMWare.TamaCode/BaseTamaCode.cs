@@ -33,6 +33,11 @@ namespace GMWare.TamaCode
         protected TamaCodeType codeType;
 
         /// <summary>
+        /// Gets or sets the code version.
+        /// </summary>
+        public int Version { get; set; }
+
+        /// <summary>
         /// Gets the code type.
         /// </summary>
         public TamaCodeType CodeType => codeType;

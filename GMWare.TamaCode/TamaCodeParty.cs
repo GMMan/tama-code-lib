@@ -25,47 +25,18 @@ using System.Text;
 namespace GMWare.TamaCode
 {
     /// <summary>
-    /// Represents the type of Tama Code.
+    /// Represents a Tama Code party.
     /// </summary>
-    public enum TamaCodeType : byte
+    public class TamaCodeParty : FriendTamaCode
     {
-        /// <summary>
-        /// Profile card.
-        /// </summary>
-        Profile,
-        /// <summary>
-        /// Playdate invitation.
-        /// </summary>
-        Playdate,
-        /// <summary>
-        /// Character for explore mode, unused.
-        /// </summary>
-        Camera,
-        /// <summary>
-        /// Unknown.
-        /// </summary>
-        BackItem,
-        /// <summary>
-        /// Unknown.
-        /// </summary>
-        BackTamatomo,
-        /// <summary>
-        /// Meetup invitation.
-        /// </summary>
-        Meetup,
-        /// <summary>
-        /// Item gift.
-        /// </summary>
-        Gift,
-        /// <summary>
-        /// Item download not associated with an originating user.
-        /// </summary>
-        Download,
-        /// <summary>
-        /// Party invitation
-        /// </summary>
-        Party,
+        internal TamaCodeParty()
+        {
+            codeType = TamaCodeType.Party;
+        }
 
-        MaxType
+        public TamaCodeParty(uint deviceId, TamaStats stats, TamaProfile profile) : base(deviceId, stats, profile)
+        {
+            codeType = TamaCodeType.Party;
+        }
     }
 }

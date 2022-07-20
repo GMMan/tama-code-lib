@@ -134,6 +134,10 @@ namespace GMWare.TamaCode.TestApp
                             Item = (short)giftItemNumericUpDown.Value
                         };
                     }
+                    else if (tabControl.SelectedTab == partyTabPage)
+                    {
+                        tamaCode = new TamaCodeParty(deviceId, stats, profile);
+                    }
                 }
 
                 if (tamaCode == null)
@@ -143,6 +147,7 @@ namespace GMWare.TamaCode.TestApp
                 }
                 else
                 {
+                    tamaCode.Version = (int)versionNumericUpDown.Value;
                     byte[] data = TamaCodeEncoder.Encode(tamaCode);
                     codeHexTextBox.Text = BitConverter.ToString(data).Replace("-", string.Empty);
                     UpdateQRCode(data);
@@ -193,6 +198,7 @@ namespace GMWare.TamaCode.TestApp
                 byte[] encoded = HexStringToBytes(codeHexTextBox.Text);
                 BaseTamaCode tamaCode = TamaCodeEncoder.Decode(encoded);
                 UpdateQRCode(encoded);
+                versionNumericUpDown.Value = tamaCode.Version;
 
                 TabPage selectedTab = null;
                 if (tamaCode is TamaCodeDownload tcd)
@@ -246,6 +252,9 @@ namespace GMWare.TamaCode.TestApp
                             selectedTab = giftTabPage;
                             var giftCode = tamaCode as TamaCodeGift;
                             giftItemNumericUpDown.Value = giftCode.Item;
+                            break;
+                        case TamaCodeType.Party:
+                            selectedTab = partyTabPage;
                             break;
                         case TamaCodeType.Camera:
                         case TamaCodeType.BackItem:
